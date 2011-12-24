@@ -1,0 +1,84 @@
+<!--
+  Errand Framework Copyright (c) 2002-2011 SIG Networks Corporation
+  -->
+
+<h1>Errand Requirements</h1>
+<ul>
+    <li>Java 6</li>
+    <li>Scala 2.9</li>
+    <li>Servlet 3.0</li>
+    <li>JPA 2.0</li>
+</ul>
+
+<h1>Stuff to add to the documentation</h1>
+<ul>
+    <li>Not necessary to have a single session class like Wicket;  just use SVar.</li>
+    <li>Initializing an RVar from the request or a link handler.</li>
+    <li>Use alternate event managers by binding them to the thread before calling the HTML-generating methods.</li>
+    <li>Example of setting up some code to run before every request.</li>
+    <li>Design principle:  Keep nulls out of the code.</li>
+    <li>Design principle:  Be to other frameworks as Scala is to Java.</li>
+    <li>Design principle:  Be flexible like the servlet API itself.</li>
+    <li>Design principle:  Embrace the servlet API (extend our servlet!).</li>
+    <li>Design principle:  Type safety.</li>
+    <li>Design principle:  Use the compiler.</li>
+    <li>Design principle:  Don't invent new features when Scala features work fine.</li>
+    <li>Design principle:  Include apply factory methods for immutable "data" classes.</li>
+    <li>Design principle:  Constructor/extractor methods for string-like data like Path, Path3, Directory, Url.</li>
+    <li>To rewrite requests or responses multiple times, just write a wrapper function.</li>
+    <li>Show how to handle an AJAX request by partially reprocessing a template.</li>
+    <li>Working with URLs.</li>
+    <li>Pull model for parameters.</li>
+    <li>Troubleshooting:  stack overflow due to passing tag to merge/replace<./li>
+    <li>Breaking out of MVC: adding custom request handlers etc.</li>
+    <li>List of thread-local objects and what they do.</li>
+    <li>Introduction with nifty stuff that the framework supports.</li>
+    <li>Why we don't use filter: feels wrong, path info not available, only one per app, forward works fine.</li>
+    <li>Show little flowcharts for the different request handler types.</li>
+    <li>Issue with traditional MVC is that C has to do all logic before it can think of calling V; link to mythical business layer.</li>
+    <li>There's no V really. The V is on the client. We're writing a program that describes the V.</li>
+    <li>Controller that maintains state should be class, not object. Stateless controllers or components can be objects.</li>
+    <li>Can have an object controller but still create new components.</li>
+    <li>Controller should initialize in constructor, but Page and Form etc. are only available while rendering.</li>
+    <li>Don't assume single thread while rendering unless the controller or component is unique to a request and/or session.</li>
+    <li>Page is a component (?).</li>
+    <li>Other frameworks like Spring rely on annotations for shortcuts;  Scala provides its own shortcuts.</li>
+    <li>Cool feature of XML:  automatic escaping of HTML entities.</li>
+    <li>List vs. Seq:  Generally we want to accept Seq but declare/return List.  Never use List with Node though.</li>
+    <li>How easy it is:  to create trees, tables.</li>
+    <li>Forces IE8 standards mode.</li>
+    <li>Common issues working with XML:  lack of ++ splits up one NodeSeq into two;  lack of ';' runs two NodeSeqs into one</li>
+    <li>Example of Editor for Address</li>
+    <li>Object lifecycles: when pages are instantiated, how def differs from val etc.</li>
+</ul>
+
+<h1>Major To-Dos Before 0.1</h1>
+<ul>
+    <li>DONE: Resource (image, JavaScript) serving</li>
+    <li>DONE: Better head and template support in XHtmlView</li>
+    <li>Comet</li>
+    <li>AJAX</li>
+    <li>Naked objects</li>
+    <li>DONE: Load default tags for template</li>
+    <li>Exception handling</li>
+    <li>DONE: Session actor</li>
+    <li>Velocity</li>
+    <li>Test coverage</li>
+    <li>Rationalize how we do implicit conversions.  I don't think "apply" should be an implicit conversion--or at least
+        there should only be one.  Apply should create something from its component parts, not "convert" it from
+        something else, I think. I have implicit apply in MediaType and Location.  It might be okay in Location.</li>
+</ul>
+
+<h1>Clean-Up Before 0.1</h1>
+<ul>
+    <li>Convert log messsages to use format strings</li>
+    <li>Add [this] to private as appropriate (actually don't do this)</li>
+    <li>Import object methods where practical</li>
+</ul>
+
+<h1>Stuff for 0.2</h1>
+<ul>
+    <li>Internationalization/localization</li>    
+    <li>Image maps</li>
+    <li>Set of components with consistent look and feel.  Use CSS styles like foo-calendar-td etc.</li>
+</ul>
