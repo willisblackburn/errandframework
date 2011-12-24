@@ -1,0 +1,31 @@
+Maven Settings
+
+  The current version of the Errand Framework is 0.1-SNAPSHOT.
+
+  You must add the Errand Framework repository to the repositories section of your Maven configuration:
+
++--
+<repositories>
+    ...
+    <repository>
+        <id>repo.errandframework.org</id>
+        <name>Errand Framework Repository</name>
+        <url>http://repo.errandframework.org/repository</url>
+    </repository>
+    ...
+</repositories>
++--
+
+  Then add the Errand core library as a dependency:
+
++--
+<dependencies>
+    ...
+    <dependency>
+        <groupId>org.errandframework</groupId>
+        <artifactId>core</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    </dependency>
+    ...
+</dependencies>
+

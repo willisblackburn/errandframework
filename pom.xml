@@ -29,6 +29,11 @@
     </properties>
 
     <distributionManagement>
+        <repository>
+            <id>repo.errandframework.org</id>
+            <name>Errand Framework Repository</name>
+            <url>scp://repo.errandframework.org/home/errand/repository</url>
+        </repository>
         <site>
             <id>www.errandframework.org</id>
             <name>Errand Framework Web Site</name>
