@@ -1,7 +1,6 @@
 package org.errandframework.examples.trivial
 
 import org.errandframework.http._
-import org.errandframework.http.Location.rootLocation
 import org.errandframework.components.Link
 
 /**
@@ -9,27 +8,28 @@ import org.errandframework.components.Link
  */
 class TrivialExampleServlet extends ErrandServlet {
 
-  private val welcomeLocation = rootLocation / "welcome"
-  private val anotherLocation = rootLocation / "another"
+  private val counterLocation = rootLocation / "counter"
 
   private val mapping: PartialFunction[Path, Controller] = {
 
-    case welcomeLocation() => XhtmlResponse(
+    case rootLocation() => XhtmlResponse(
       <html xmlns="http://www.w3.org/1999/xhtml">
         <h1>Welcome to Errand</h1>
         <p>The trival example works!</p>
-        <p>{Link("Second Page", anotherLocation.toUrl()).render}</p>
+        <p>{Link("Counter", counterLocation.toUrl()).render}</p>
       </html>
     )
 
-    case anotherLocation() => XhtmlResponse(
+    case counterLocation() => counter.value += 1; XhtmlResponse(
       <html xmlns="http://www.w3.org/1999/xhtml">
-        <h1>Another Page</h1>
-        <p>This is another page.</p>
+        <h1>Counter</h1>
+        <p>You've loaded this page {counter.value} times.</p>
       </html>
     )
 
   }
 
   protected val mappers = Seq(new PathRequestMapper(mapping))
+
+  private val counter = SessionVar[Int](0)
 }

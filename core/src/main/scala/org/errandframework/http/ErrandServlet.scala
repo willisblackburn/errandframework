@@ -5,8 +5,6 @@
 package org.errandframework.http
 
 import javax.servlet.http.{HttpServletResponse, HttpServletRequest, HttpServlet}
-import Location.rootLocation
-import org.errandframework.http.BuiltinCodecs.StringCodec
 import org.errandframework.util.Log
 
 /**

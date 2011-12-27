@@ -7,7 +7,6 @@ package forms
 
 import pages.{Page, PageResponse}
 import org.errandframework.http._
-import org.errandframework.http.BuiltinCodecs.IntCodec
 
 abstract class Button(val buttonType: String, val content: Component) extends Component {
 

@@ -7,9 +7,6 @@ package ajax
 
 import org.errandframework.components._
 import forms.{Choice, TextField}
-import org.errandframework.http.BuiltinCodecs.StringCodec
-import org.errandframework.http.MediaType._
-import org.errandframework.http.Path._
 import org.errandframework.http._
 import java.util.UUID
 import pages.Page

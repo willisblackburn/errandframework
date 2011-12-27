@@ -10,8 +10,6 @@ object Location {
   case class NameSegment(name: String) extends Segment
   case class ParameterSegment(parameter: Parameter[_]) extends Segment
 
-  val rootLocation = new Location(Nil)
-
   def thisLocation = rootLocation / RequestContext.request.path
 
   /**
@@ -103,7 +101,7 @@ class Location private[http](segments: List[Segment]) {
   // TODO, return Url?
 
   def toUrl(assignments: ParameterAssignment[_]*) =
-    "/" + RequestContext.request.contextServletPath.toString + toLocalUrl(assignments: _*)
+    RequestContext.request.contextServletPath.toComponentString + toLocalUrl(assignments: _*)
 
   def toUrl(defaultParameters: Seq[RequestParameter[_]], assignments: ParameterAssignment[_]*): String = {
     toUrl((assignments.toSet ++ defaultParameters.map(_.toAssignment)).toSeq: _*)

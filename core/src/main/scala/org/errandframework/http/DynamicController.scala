@@ -5,7 +5,6 @@
 package org.errandframework.http
 
 import collection.mutable
-import BuiltinCodecs.IntCodec
 
 /**
  * DynamicController maps to other controllers that are dynamically registered and kept in the session.

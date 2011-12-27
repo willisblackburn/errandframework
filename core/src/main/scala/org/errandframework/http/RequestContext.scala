@@ -26,41 +26,16 @@ class RequestContext(val httpRequest: HttpServletRequest, val httpResponse: Http
   def hasSession = httpRequest.getSession(false) != null
 
   /**
-   * Wrap the encodeURL method of HttpServletResponse and also invokes expandPaths, which translates an initial
-   * "/./" or "/././" to the context path or the context plus servlet path, respectively.
-   * @param baseUrl the URL.
-   * @return the encoded URL.
+   * Wrap the encodeURL method of HttpServletResponse.
    */
   def encodeURL(url: String) = httpResponse.encodeURL(url)
 
   /**
    * Similar to encodeUrl but wraps encodeRedirectURL instead of encodeURL.
-   * @param baseUrl the URL.
+   * @param url the URL.
    * @return the encoded URL.
    */
   def encodeRedirectURL(url: String) = httpResponse.encodeRedirectURL(url)
-
-//  // TODO, generalize this into a way to identify the part of the URL tree that we're in so that
-//  // the application can invoke, say, getBasePath, to get the part of the path that should be assumed.
-//  // It would default to the context/servlet path, but there would be a way to add to it.
-//  // Maybe this is a stupid idea.
-//
-//  val CONTEXT_DOT_PATH = "/./"
-//  val CONTEXT_DOT_PATH_LENGTH_MINUS_1 = CONTEXT_DOT_PATH.length - 1
-//  val CONTEXT_SERVLET_DOT_PATH = "/././"
-//  val CONTEXT_SERVLET_DOT_PATH_LENGTH_MINUS_1 = CONTEXT_SERVLET_DOT_PATH.length - 1
-//
-//  /**
-//   * Replaces "/././" at the beginning of the URL with the servlet path or "/./" with the context path,
-//   * so that (for example) context-relative URLs may be written as "/./path/to/the/resource" without requiring a
-//   * special tag.
-//   */
-//  def expandPaths(url: String) = if (url.startsWith(CONTEXT_SERVLET_DOT_PATH))
-//    request.contextServletPath + url.substring(CONTEXT_SERVLET_DOT_PATH_LENGTH_MINUS_1)
-//  else if (url.startsWith(CONTEXT_DOT_PATH))
-//    request.contextPath + url.substring(CONTEXT_DOT_PATH_LENGTH_MINUS_1)
-//  else
-//    url
 }
 
 object RequestContext extends DynamicVariable[Option[RequestContext]](None) {
@@ -83,11 +58,6 @@ object RequestContext extends DynamicVariable[Option[RequestContext]](None) {
 
   def encodeURL(url: String) = get.encodeURL(url)
 
-  /**
-   * Similar to encodeUrl but wraps encodeRedirectURL instead of encodeURL.
-   * @param baseUrl the URL.
-   * @return the encoded URL.
-   */
   def encodeRedirectURL(url: String) = get.encodeRedirectURL(url)
 
   def get() = value.getOrElse(throw new RuntimeException("No RequestContext bound to the current thread"))

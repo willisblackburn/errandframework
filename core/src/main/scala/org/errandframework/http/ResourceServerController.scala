@@ -4,9 +4,6 @@
 
 package org.errandframework.http
 
-import BuiltinCodecs.PathCodec
-import MediaType._
-
 /**
  * ResourceServerController serves a static resource.
  * The resource may come from any ResourceFinder implementation.

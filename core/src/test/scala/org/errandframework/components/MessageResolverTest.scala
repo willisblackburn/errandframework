@@ -99,23 +99,9 @@ class MessageResolverTest extends WordSpec with MustMatchers with MockitoSugar {
   }
 }
 
-class TestServlet extends ErrandServlet {
-  val mediaTypeMapper = new StaticMediaTypeMapper
-  val dynamicLocation = Location.rootLocation
-  protected val dynamicController = new DynamicController
-  val resourceServerLocation = Location.rootLocation
-  protected val resourceServerController = new ResourceServerController(new ClassPathResourceFinder(mediaTypeMapper))
-  protected def mappers = Seq.empty
-}
+class TestServlet extends DefaultErrandServlet
 
-class TestServlet2 extends ErrandServlet {
-  val mediaTypeMapper = new StaticMediaTypeMapper
-  val dynamicLocation = Location.rootLocation
-  protected val dynamicController = new DynamicController
-  val resourceServerLocation = Location.rootLocation
-  protected val resourceServerController = new ResourceServerController(new ClassPathResourceFinder(mediaTypeMapper))
-  protected def mappers = Seq.empty
-}
+class TestServlet2 extends DefaultErrandServlet
 
 class TestPage extends Page {
   def bodyContent = Component.empty

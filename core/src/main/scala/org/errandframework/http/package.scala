@@ -1,31 +1,17 @@
-/*
- * Errand Framework Copyright (c) 2002-2011 SIG Networks Corporation
- */
-
-package org.errandframework.http
+package org.errandframework
 
 import java.util.UUID
 
-// TODO, additional codecs for:
-// 1. Paths (with optional escaping).
-// 2. Strings with escaping (for use in the middle of URLs).
-// 3. Sets of strings encoded as a comma-delimited list.
-// 4. Tags?
+package object http {
 
-/**
- * Collection of built-in codecs.
- * All are implicit objects and so will be picked up by a parameter of the corresponding type.
- */
-object BuiltinCodecs {
+  /**
+   * The root location, used (directly or indirectly) to create all other locations.
+   */
+  val rootLocation = new Location(Nil)
 
   import Codec.NO_VALUE
 
-  // TODO, provide a StringCodec that handles null differently.  (Why?)
-  // TODO, provide a PathCodec that adds an initial '/' if the string is not blank and doesn't have one already. (Why?)
-
-  // Simple codecs for built-in types:
-
-  implicit object StringCodec extends Codec[String] {
+  implicit val stringCodec = new Codec[String] {
 
     def encode(value: String) = if (value != null) value else NO_VALUE
 
@@ -39,7 +25,7 @@ object BuiltinCodecs {
    * control is not "successful" according to the HTML spec and therefore its value is not submitted to the server),
    * and so using BooleanCodec will produce Invalid.
    */
-  implicit object BooleanCodec extends Codec[Boolean] {
+  implicit val booleanCodec = new Codec[Boolean] {
 
     // scala.Boolean cannot be null.
 
@@ -52,7 +38,7 @@ object BuiltinCodecs {
     }
   }
 
-  implicit object IntCodec extends Codec[Int] {
+  implicit val intCodec = new Codec[Int] {
 
     // scala.Int cannot be null.
 
@@ -65,7 +51,7 @@ object BuiltinCodecs {
     }
   }
 
-  implicit object LongCodec extends Codec[Long] {
+  implicit val longCodec = new Codec[Long] {
 
     // scala.Long cannot be null.
 
@@ -78,7 +64,7 @@ object BuiltinCodecs {
     }
   }
 
-  implicit object DoubleCodec extends Codec[Double] {
+  implicit val doubleCodec = new Codec[Double] {
 
     // scala.Double cannot be null.
 
@@ -93,7 +79,7 @@ object BuiltinCodecs {
 
   // Codecs for other common types.
 
-  implicit object UuidCodec extends Codec[UUID] {
+  implicit val uuidCodec = new Codec[UUID] {
 
     def encode(value: UUID) = if (value != null) value.toString else NO_VALUE
 
@@ -104,7 +90,7 @@ object BuiltinCodecs {
     }
   }
 
-  implicit object ClassCodec extends Codec[Class[_]] {
+  implicit val classCodec = new Codec[Class[_]] {
 
     def encode(value: Class[_]) = if (value != null) value.getName else NO_VALUE
 
@@ -115,11 +101,10 @@ object BuiltinCodecs {
     }
   }
 
-  implicit object PathCodec extends Codec[Path] {
+  implicit val pathCodec = new Codec[Path] {
 
     def encode(value: Path) = if (value != null) value.toString else NO_VALUE
 
     def decode(raw: String) = if (raw != NO_VALUE) Path(raw) else null
   }
 }
-

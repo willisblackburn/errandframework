@@ -70,7 +70,22 @@ class Path(val names: List[String]) extends Seq[String] with SeqLike[String, Pat
 
   def extension = components._3
 
+  /**
+   * Converts the path into a string with the individual names separated by the web path separator
+   * character "/".
+   */
   override def toString() = names.mkString("/")
+
+  /**
+   * Similar to toString, but adds an initial path separator character "/" if the path is not empty.
+   * This is consistent with the way that the servlet standard provides the context and servlet paths to the
+   * application.  It insures that the path can be used as a component of a longer path by simply concatenating
+   * the strings together, without having to worry about separators.
+   */
+  def toComponentString() = names match {
+    case Nil => ""
+    case _ => "/" + toString
+  }
 }
 
 object Path {

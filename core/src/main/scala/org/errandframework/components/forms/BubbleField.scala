@@ -5,7 +5,6 @@
 package org.errandframework.components
 package forms
 
-import org.errandframework.http.Path._
 import java.util.UUID
 import org.errandframework.http._
 import org.errandframework.components.pages.Page

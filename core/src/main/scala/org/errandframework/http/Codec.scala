@@ -6,7 +6,7 @@ package org.errandframework.http
 
 
 import java.text.{SimpleDateFormat, DateFormat}
-import java.util.Date
+import java.util.{UUID, Date}
 
 /**
  * Trait that defines conversions between various data types and a String.

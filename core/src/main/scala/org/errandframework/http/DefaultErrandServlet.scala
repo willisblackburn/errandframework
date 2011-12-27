@@ -3,7 +3,7 @@ package org.errandframework.http
 /**
  * Subclass of ErrandServlet that provides some common mixins and settings.
  */
-abstract class DefaultErrandServlet extends ErrandServlet with DynamicControllerProvider with ResourceServerControllerProvider {
+class DefaultErrandServlet extends ErrandServlet with DynamicControllerProvider with ResourceServerControllerProvider {
 
   protected val mediaTypeMapper = new StaticMediaTypeMapper(
     MediaType("image", "jpeg") -> Seq("jpg", "jpeg"),
@@ -14,9 +14,24 @@ abstract class DefaultErrandServlet extends ErrandServlet with DynamicController
     MediaType("text", "javascript") -> Seq("js")
   )
 
-  val dynamicLocation = Location.rootLocation / "dyn"
+  val dynamicLocation = rootLocation / "dyn"
   protected val dynamicController = new DynamicController
 
-  val resourceServerLocation = Location.rootLocation / "res"
+  val resourceServerLocation = rootLocation / "res"
   protected val resourceServerController = new ResourceServerController(new ClassPathResourceFinder(mediaTypeMapper))
+
+  private val defaultMapping: PartialFunction[Path, Controller] = {
+    case rootLocation() => XhtmlResponse(
+      <html xmlns="http://www.w3.org/1999/xhtml">
+        <h1>Welcome to Errand</h1>
+        <p>
+          You are seeing this page because you have not created a mapping for the root location
+          in your Errand servlet.
+        </p>
+      </html>)
+    case dynamicLocation() => dynamicController
+    case resourceServerLocation() => resourceServerController
+  }
+
+  protected def mappers = Seq(new PathRequestMapper(defaultMapping))
 }
