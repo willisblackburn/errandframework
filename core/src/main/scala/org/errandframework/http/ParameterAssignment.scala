@@ -4,8 +4,6 @@
 
 package org.errandframework.http
 
-import java.lang.IllegalStateException
-
 /**
  * ParameterAssignment is a parameter with a specific value.
  * Parameters can implicitly become ParameterAssignments through binding with their own current value,
@@ -16,8 +14,8 @@ case class ParameterAssignment[T](parameter: RequestParameter[T], value: T) {
   def encode() = parameter.encode(value)
 
   def encodeAsString() = parameter match {
-    case single: SingleValuedRequestParameter[_] => single.encodeAsString(value)
-    case _ => throw new IllegalStateException("Parameter class " + parameter.getClass.getName + " does not implement SingleValuedRequestParameter")
+    case single: Parameter[_] => single.encodeAsString(value)
+    case _ => throw new UnsupportedOperationException("Parameter class " + parameter.getClass.getName + " does not support encodeAsString")
   }
 
   final override def equals(that: Any) = that match {

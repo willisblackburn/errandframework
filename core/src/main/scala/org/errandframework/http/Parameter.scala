@@ -16,6 +16,9 @@ import java.net.URLEncoder
 
 /**
  * Parameter is a type of RequestParameter that translates between the type T and a simple string value.
+ * Parameters that can be encoded a single string may be embedded in URLs or used as a field value,
+ * whereas parameters that potentially
+ * encode as no parameter, or as multiple parameters, or as a non-string value, may not.
  * A Parameter always maps to exactly one string value in the request with the same name as the parameter.
  * If the parameter is not present in the request,
  * then Parameter returns the value Invalid.
@@ -23,7 +26,7 @@ import java.net.URLEncoder
  * (Use BooleanParameter, OptionParameter, or ListParameter if you need to different behavior for the
  * no-value and many-values cases.)
  */
-class Parameter[T](val name: String, codec: Codec[T]) extends SingleValuedRequestParameter[T] {
+class Parameter[T](val name: String, codec: Codec[T]) extends RequestParameter[T] {
 
   import Parameter.log
 
