@@ -4,10 +4,6 @@
 
 package org.errandframework.components
 
-/*
- * Errand Framework Copyright (c) 2002-2011 SIG Networks Corporation
- */
-
 import org.errandframework.util.XmlHelpers._
 
 /**

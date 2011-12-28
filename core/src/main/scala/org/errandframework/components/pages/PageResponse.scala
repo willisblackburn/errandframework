@@ -35,7 +35,7 @@ class PageResponse(page: Page) extends Response {
           def respond(request: Request) = XhtmlResponse(xhtml)
         }
         val controllerId = DynamicControllerProvider.registerController(controller)
-        val url = DynamicControllerProvider.urlForControllerId(controllerId)
+        val url = DynamicControllerProvider.localUrlForControllerId(controllerId)
         log.debug("Redirecting to " + url + " in response to " + method)
         RedirectResponse(url)
     }

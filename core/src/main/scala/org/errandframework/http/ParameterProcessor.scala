@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST
  *   have their own validate methods;  this method performs any validations that require more than
  *   one parameter.</li>
  *   <li>onError handles any errors.  By default this method returns a status response.</li>
- *   <li>onValid generate the response after all of the validation checks have been performed.</li>
+ *   <li>onValid generates the response after all of the validation checks have been performed.</li>
  * </ul>
  * <p>ParameterProcessor implementations must also provide the parameters set, which identifies the
  * parameters to process.  ParameterProcessor invokes the decodeAndSet method on each parameter, so that

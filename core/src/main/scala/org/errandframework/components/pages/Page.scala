@@ -20,6 +20,11 @@ abstract class Page extends Component {
 
   def render(): NodeSeq = PageStyle.renderPage(this)
 
+  /**
+   * Identifies the parameters that this page accepts.  This information is used by PageController (which
+   * extends ParameterProcessor) to decode and validate the parameters before calling onValid, which generates
+   * the PageResponse.
+   */
   def parameters: Seq[RequestParameter[_]] = Seq.empty
 
   def validate(): Boolean = true
@@ -30,7 +35,7 @@ abstract class Page extends Component {
    * A collection in which to accumulate new tags for the head section.
    * The additional head content is maintained in the request and so is regenerated with each render.
    * We use a LinkedHashSet to preserve the order in which the head content was added (to avoid weird bugs that might
-   * only occur if the head content was rendered in some unexpected order) but also for de-duping purposes.
+   * only occur if the head content was rendered in some unexpected order) and also for de-duping purposes.
    * (Note that Component implementations must provide equals and hashCode implementations for this
    * to work well and consistently.)
    */
@@ -45,8 +50,15 @@ abstract class Page extends Component {
    */
   def additionalHeadContents: Seq[Component] = _additionalHeadContents.value.toSeq
 
+  /**
+   * The contents of the HTML &lt;body&gt; tag.
+   */
   def bodyContent: Component
 
+  /**
+   * The page title.
+   * DefaultPageStyle will add this to the page &lt;head&gt; section.
+   */
   def title: String = "Untitled"
 
   def resourceBundleNames: List[String] = ClassPathHelpers.expandSuperclasses(getClass).map(_.getName)
@@ -57,8 +69,6 @@ object Page extends DynamicVariable[Option[Page]](None) {
   def addHeadContent(content: Component) {
     get.addHeadContent(content)
   }
-
-//  def registerController(component: Component, newController: Controller) = get.registerController(component, newController)
 
   def get() = value.getOrElse(throw new RuntimeException("No Page bound to the current thread"))
 }

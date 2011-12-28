@@ -21,7 +21,9 @@ trait DynamicControllerProvider {
    */
   def registerController(controller: Controller) = dynamicController.register(controller)
 
-  def urlForControllerId(controllerId: Int) = dynamicLocation.toLocalUrl(DynamicController.controllerIdParameter -> controllerId)
+  def urlForControllerId(controllerId: Int) = dynamicLocation.toUrl(DynamicController.controllerIdParameter -> controllerId)
+
+  def localUrlForControllerId(controllerId: Int) = dynamicLocation.toLocalUrl(DynamicController.controllerIdParameter -> controllerId)
 }
 
 object DynamicControllerProvider {
@@ -34,4 +36,6 @@ object DynamicControllerProvider {
   def registerController(controller: Controller) = get.registerController(controller)
 
   def urlForControllerId(controllerId: Int) = get.urlForControllerId(controllerId)
+
+  def localUrlForControllerId(controllerId: Int) = get.localUrlForControllerId(controllerId)
 }

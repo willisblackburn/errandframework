@@ -17,9 +17,9 @@ trait EmbeddedController {
   /**
    * The dynamic controller URL.
    */
-  def url = "/" + RequestContext.request.contextServletPath.toString + localUrl
+  def url = DynamicControllerProvider.urlForControllerId(controllerId)
 
-  def localUrl = DynamicControllerProvider.urlForControllerId(controllerId)
+  def localUrl = DynamicControllerProvider.localUrlForControllerId(controllerId)
 
   protected lazy val controllerId = DynamicControllerProvider.registerController(controller)
 }

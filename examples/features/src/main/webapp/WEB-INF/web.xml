@@ -13,14 +13,14 @@
 
     <servlet>
         <description>Handles all Errand requests</description>
-        <display-name>Trivial Example Servlet</display-name>
-        <servlet-name>trivialExampleServlet</servlet-name>
-        <servlet-class>org.errandframework.examples.trivial.TrivialExampleServlet</servlet-class>
+        <display-name>Features Example Servlet</display-name>
+        <servlet-name>featuresExampleServlet</servlet-name>
+        <servlet-class>org.errandframework.examples.features.FeaturesExampleServlet</servlet-class>
         <async-supported>true</async-supported>
         <multipart-config/>
     </servlet>
     <servlet-mapping>
-        <servlet-name>trivialExampleServlet</servlet-name>
+        <servlet-name>featuresExampleServlet</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 

@@ -20,18 +20,19 @@ class DefaultErrandServlet extends ErrandServlet with DynamicControllerProvider 
   val resourceServerLocation = rootLocation / "res"
   protected val resourceServerController = new ResourceServerController(new ClassPathResourceFinder(mediaTypeMapper))
 
-  private val defaultMapping: PartialFunction[Path, Controller] = {
+  protected val defaultMapper = new PathRequestMapper({
     case rootLocation() => XhtmlResponse(
       <html xmlns="http://www.w3.org/1999/xhtml">
         <h1>Welcome to Errand</h1>
         <p>
           You are seeing this page because you have not created a mapping for the root location
-          in your Errand servlet.
+          in your Errand servlet or because you put DefaultErrandServlet.defaultMapper before your own mappers
+          in your mappers list.
         </p>
       </html>)
     case dynamicLocation() => dynamicController
     case resourceServerLocation() => resourceServerController
-  }
+  })
 
-  protected def mappers = Seq(new PathRequestMapper(defaultMapping))
+  protected val mappers = Seq(defaultMapper)
 }

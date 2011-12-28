@@ -8,22 +8,21 @@ import collection.mutable.{ArraySeq, ListBuffer, Builder}
 import collection.generic.{CanBuildFrom, HasNewBuilder, GenericTraversableTemplate}
 import collection.SeqLike
 
-// TODO, fix docs:
+// TODO, should merge this with Location if there aren't any conflicts.
 
 /**
- * <p>Path converts paths between Strings and a List of Strings (path components).
- * When converting from Strings to Lists:</p>
+ * <p>Path enables a path-like string to be treated either as a single string in which the path components are
+ * separated by the path-separator character '/' or as a list of path components.</p>
+ * When converting from a string to a list:</p>
  * <ul>
- *   <li>An empty list becomes a blank string.</li>
+ *   <li>An empty string, or a string consisting of nothing but path separator characters, becomes an empty list.</li>
  *   <li>Otherwise the string is split around paths separators ('/').</li>
  *   <li>Any zero-length path components are collapsed/removed, so the path "/foo//bar" becomes "foo" :: "bar" :: Nil.</li>
  * </ul>
- * <p>When converting from Lists to Strings:
+ * <p>When converting from a list to a string:
  * <ul>
- *   <li>An empty string becomes an empty list.</li>
- *   <li>Otherwise the string consists of an initial path separator ('/')
- *   followed by the path components delimited by separators ('/').</li>
- *   <li>Any empty path components in the initial string are removed.</li>
+ *   <li>An empty list becomes a blank string.</li>
+ *   <li>Otherwise the string consists of the path components delimited by separators ('/').</li>
  *   <li>The resulting path string does not end with a separator ('/').</li>
  * </ul>
  */
@@ -72,12 +71,12 @@ class Path(val names: List[String]) extends Seq[String] with SeqLike[String, Pat
 
   /**
    * Converts the path into a string with the individual names separated by the web path separator
-   * character "/".
+   * character '/'.
    */
   override def toString() = names.mkString("/")
 
   /**
-   * Similar to toString, but adds an initial path separator character "/" if the path is not empty.
+   * Similar to toString, but adds an initial path separator character '/' if the path is not empty.
    * This is consistent with the way that the servlet standard provides the context and servlet paths to the
    * application.  It insures that the path can be used as a component of a longer path by simply concatenating
    * the strings together, without having to worry about separators.

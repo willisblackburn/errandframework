@@ -21,6 +21,7 @@
     <modules>
         <module>core</module>
         <module>examples/trivial</module>
+        <module>examples/features</module>
     </modules>
 
     <properties>
@@ -40,6 +41,15 @@
             <url>scp://www.errandframework.org/home/errand/public_html</url>
         </site>
     </distributionManagement>
+
+    <developers>
+        <developer>
+            <id>wboyce</id>
+            <name>Willis Blackburn</name>
+            <organization>SIG Networks Corporation</organization>
+            <email>wboyce@signetworks.com</email>
+        </developer>
+    </developers>
 
     <repositories>
         <repository>

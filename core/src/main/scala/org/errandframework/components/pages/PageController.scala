@@ -15,7 +15,7 @@ import org.errandframework.http.Methods._
  * to create instances of this controller and assign them to URLs without creating the page until it's needed.
  * For example, we may create a page with lots of links with dynamic URLs.  We need a controller to assign to
  * each URL.  But we don't actually want to create all the pages.  We only want to create the page when
- * the client actualy follows one of the links.
+ * the client actually follows one of the links.
  * PageController implements ParameterProcessor and retrieves parameter information from the Page.
  */
 class PageController(newPage: => Page) extends Controller with ParameterProcessor {

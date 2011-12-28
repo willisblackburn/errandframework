@@ -30,6 +30,8 @@ abstract class Link(val content: Component) extends Component {
  */
 object Link {
 
+  def apply(linkUrl: String, linkBehaviors: Behavior*): Link = apply(linkUrl, linkUrl, linkBehaviors: _*)
+
   def apply(content: Component, linkUrl: String, linkBehaviors: Behavior*) = new Link(content) {
     val url = linkUrl
     override def behaviors = linkBehaviors

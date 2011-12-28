@@ -4,16 +4,17 @@
 
 package org.errandframework.http
 
-/*
- * Errand Framework Copyright (c) 2002-2011 SIG Networks Corporation
- */
-
 import org.errandframework.util.Log
 import java.net.URLEncoder
 
 /**
- * OptionParameter is similar to Parameter except that it decodes to None if the parameter is not present
- * in the request.
+ * OptionParameter is similar to Parameter except that it makes the value optional.
+ * Regular Parameter instances require that the given request parameter be included in the request.
+ * Use OptionParameter if it's okay for the parameter not to be present.  The parameter will be decoded into
+ * Some(value) if the value was supplied and None if it wasn't.
+ * Note that this is different from using Parameter together with OptionCodec.  In that case, the parameter
+ * must be part of the request, but will be decoded either to Some(value) or None depending on the actual
+ * parameter value.
  */
 class OptionParameter[T](val name: String, codec: Codec[T]) extends RequestParameter[Option[T]] {
 

@@ -12,11 +12,6 @@ import pages.Page
 import org.errandframework.util.Log
 import org.errandframework.http.{MediaType, CharacterBufferResponse, Response}
 
-// TODO, figure out of this belongs in ajax.http or http.ajax or something like that.
-// Maybe it just belongs here since it does accept components.
-// Perhaps this is AjaxUpdateResponse and there are some other types of AJAX responses too.
-// Probably change the content type to something applicaion-specific.
-
 /**
  * AjaxResponse sends updates to a set of components to the browser.
  * Each of the components must have an element ID.
@@ -31,7 +26,7 @@ class AjaxResponse(page: Page, components: Component*) extends Response with Log
         Seq.empty
     }
     val xhtml = Page.withValue(Some(page))(NodeSeq.fromSeq(components.flatMap(renderComponent)))
-    CharacterBufferResponse(MediaType("applicationex/", "xml"), xhtml.toString).send(httpRequest, httpResponse)
+    CharacterBufferResponse(MediaType("application", "xml"), xhtml.toString).send(httpRequest, httpResponse)
   }
 }
 

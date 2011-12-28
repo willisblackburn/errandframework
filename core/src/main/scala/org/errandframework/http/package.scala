@@ -9,6 +9,8 @@ package object http {
    */
   val rootLocation = new Location(Nil)
 
+  val rootPath = new Path(Nil)
+
   import Codec.NO_VALUE
 
   implicit val stringCodec = new Codec[String] {

@@ -9,5 +9,13 @@ package org.errandframework.http
  */
 trait RequestFilter {
 
+  /**
+   * Performs the filtering function.
+   * The filter may either generate its own response (if it has intercepted the request and does not want any
+   * further processing to occur) or invoke the respond function in order to continue processing.
+   * @param request the request.
+   * @param respond a function that produces the response. It will invoke either the next filter in the filter
+   * chain, or the controller's respond method.
+   */
   def filter(request: Request)(respond: Request => Response): Response
 }
