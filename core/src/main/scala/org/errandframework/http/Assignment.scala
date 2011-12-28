@@ -5,28 +5,25 @@
 package org.errandframework.http
 
 /**
- * ParameterAssignment is a parameter with a specific value.
- * Parameters can implicitly become ParameterAssignments through binding with their own current value,
+ * Assignment is a parameter with a specific value.
+ * Parameters can implicitly become Assignments through binding with their own current value,
  * or the application can provide another value.
  */
-case class ParameterAssignment[T](parameter: RequestParameter[T], value: T) {
+case class Assignment[T](parameter: RequestParameter[T], value: T) {
 
   def encode() = parameter.encode(value)
 
-  def encodeAsString() = parameter match {
-    case single: Parameter[_] => single.encodeAsString(value)
-    case _ => throw new UnsupportedOperationException("Parameter class " + parameter.getClass.getName + " does not support encodeAsString")
-  }
+  def encodeAsString() = parameter.encodeAsString(value)
 
   final override def equals(that: Any) = that match {
-    case assignment: ParameterAssignment[_] => parameter == assignment.parameter
+    case assignment: Assignment[_] => parameter == assignment.parameter
     case _ => false
   }
 
   final override def hashCode() = parameter.hashCode
 }
 
-object ParameterAssignment {
+object Assignment {
 
   /**
    * Implicitly binds a Parameter using its current value.

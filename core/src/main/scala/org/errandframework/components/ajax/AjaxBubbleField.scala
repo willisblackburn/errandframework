@@ -38,7 +38,7 @@ abstract class AjaxBubbleField[T](page: Page, parameter: MultiParameter[T]) exte
     def parameters = Seq(valueParameter)
     def onValid(request: Request) = {
       CharacterBufferResponse(MediaType("application", "json"),
-        choices(valueParameter.get).map(choice => "'" + parameter.encodeAsString(choice.value) + "'").mkString("{ choices: [", ", ", "] }"))
+        choices(valueParameter.get).map(choice => "'" + parameter.encodeSingleValueAsString(choice.value) + "'").mkString("{ choices: [", ", ", "] }"))
     }
   }
 

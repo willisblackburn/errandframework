@@ -29,6 +29,9 @@ class BooleanParameter(val name: String) extends RequestParameter[Boolean] {
     encoded
   }
 
+  def encodeAsString(value: Boolean) =
+    throw new UnsupportedOperationException("BooleanParameter does not support encodeAsString")
+
   override def toString() = "BooleanParameter(name=" + name + ")"
 }
 

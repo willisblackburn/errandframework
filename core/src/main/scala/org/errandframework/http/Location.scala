@@ -100,10 +100,10 @@ class Location private[http](segments: List[Segment]) {
 
   // TODO, return Url?
 
-  def toUrl(assignments: ParameterAssignment[_]*) =
+  def toUrl(assignments: Assignment[_]*) =
     RequestContext.request.contextServletPath.toComponentString + toLocalUrl(assignments: _*)
 
-  def toUrl(defaultParameters: Seq[RequestParameter[_]], assignments: ParameterAssignment[_]*): String = {
+  def toUrl(defaultParameters: Seq[RequestParameter[_]], assignments: Assignment[_]*): String = {
     toUrl((assignments.toSet ++ defaultParameters.map(_.toAssignment)).toSeq: _*)
   }
 
@@ -112,7 +112,7 @@ class Location private[http](segments: List[Segment]) {
    * The path is in "path info" format, without any context or servlet path.
    * Uses the current value for any parameter that the Location needs but that is not supplied by the caller.
    */
-  def toLocalUrl(assignments: ParameterAssignment[_]*) = {
+  def toLocalUrl(assignments: Assignment[_]*) = {
     // Split the given values into those that are part of the Location path and those that are extra.
     // The extra parameters will be added to the end of the path.
     val (pathAssignments, otherAssignments) = assignments.partition(v => parameters.contains(v.parameter))
@@ -126,7 +126,7 @@ class Location private[http](segments: List[Segment]) {
     HttpHelpers.appendUrlParameters("/" + path.toString, otherAssignments.flatMap(_.encode).mkString("&"))
   }
 
-  def toLocalUrl(defaultParameters: Seq[RequestParameter[_]], assignments: ParameterAssignment[_]*): String = {
+  def toLocalUrl(defaultParameters: Seq[RequestParameter[_]], assignments: Assignment[_]*): String = {
     toLocalUrl((assignments.toSet ++ defaultParameters.map(_.toAssignment)).toSeq: _*)
   }
 }

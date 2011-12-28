@@ -23,7 +23,7 @@ abstract class BubbleField[T](override val parameter: MultiParameter[T]) extends
   /**
    * Encodes each of the BubbleField values as a string, using the parameter codec.
    */
-  def encode(): Seq[String] = parameter.getOrElse(modelGet).map(parameter.encodeAsString)
+  def encode(): Seq[String] = parameter.getOrElse(modelGet).map(parameter.encodeSingleValueAsString)
 
   val bubbleListId = UUID.randomUUID.toString
 

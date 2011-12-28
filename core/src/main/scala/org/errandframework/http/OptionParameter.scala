@@ -42,6 +42,9 @@ class OptionParameter[T](val name: String, codec: Codec[T]) extends RequestParam
     encoded
   }
 
+  def encodeAsString(value: Option[T]) =
+    throw new UnsupportedOperationException("OptionParameter does not support encodeAsString")
+
   override def toString() = "OptionParameter(name=" + name + ")"
 }
 

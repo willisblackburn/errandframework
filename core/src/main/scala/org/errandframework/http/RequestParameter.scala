@@ -66,8 +66,17 @@ trait RequestParameter[T] extends ValueOperations[T] {
   /**
    * Provides a full encoding of this parameter, suitable for inclusion in a query string or a POST request body.
    * Values will be URL-encoded and multiple parameters separated by "&".
+   * Not all parameter types support this operation.  For example, a FileParameter may not be encoded as a string.
    */
   def encode(value: T): Seq[String]
+
+  /**
+   * Encodes the given value as a single string, without the parameter name.
+   * Value is NOT URL-encoded.
+   * Not all parameter types support this operation.  For example, a OptionParameter may not be encoded this way,
+   * because there would be no way to encode None.
+   */
+  def encodeAsString(value: T): String
 
   def formatErrorMessage(key: String) =
     MessageResolver.formatMessage("org.errandframework.http.RequestParameter", "parameter.error." + key + "." + name) _
@@ -79,9 +88,9 @@ trait RequestParameter[T] extends ValueOperations[T] {
 
   override def hashCode() = name.hashCode
 
-  def toAssignment() = new ParameterAssignment[T](this, get)
+  def toAssignment() = new Assignment[T](this, get)
 
-  def toAssignment(value: T) = new ParameterAssignment[T](this, value)
+  def toAssignment(value: T) = new Assignment[T](this, value)
 }
 
 object RequestParameter {

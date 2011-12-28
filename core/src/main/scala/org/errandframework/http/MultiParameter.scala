@@ -38,11 +38,14 @@ class MultiParameter[T](val name: String, codec: Codec[T]) extends RequestParame
     encoded
   }
 
+  def encodeAsString(value: Seq[T]) =
+    throw new UnsupportedOperationException("MultiParameter does not support encodeAsString")
+
   /**
    * Encodes one value of type T as a single string, without the parameter name.
    * Value is NOT URL-encoded.
    */
-  def encodeAsString(value: T): String = {
+  def encodeSingleValueAsString(value: T): String = {
     val encoded = codec.encode(value)
     log.debug("Encoded MultiParameter value: " + name + ": " + value + " -> " + encoded)
     encoded

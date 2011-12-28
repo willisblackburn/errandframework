@@ -25,7 +25,10 @@ class FileParameter(val name: String) extends RequestParameter[Seq[Part]] {
   }
 
   def encode(value: Seq[Part]) =
-    throw new UnsupportedOperationException("FileParameter cannot be encoded as a URL or POST body (files must be sent as attachments)")
+    throw new UnsupportedOperationException("FileParameter does not support encode (files must be sent as attachments)")
+
+  def encodeAsString(value: Seq[Part]) =
+    throw new UnsupportedOperationException("FileParameter does not support encodeAsString (files must be sent as attachments)")
 
   override def toString() = "FileParameter(name=" + name + ")"
 }
