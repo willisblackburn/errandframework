@@ -8,6 +8,7 @@ package pages
 import javax.servlet.http.{HttpServletResponse, HttpServletRequest}
 import org.errandframework.http._
 import org.errandframework.util.Log
+import DynamicControllerProvider.{urlForControllerId, registerController}
 
 /**
  * Respond to the request with a page.
@@ -34,8 +35,8 @@ class PageResponse(page: Page) extends Response {
         val controller = new Controller {
           def respond(request: Request) = XhtmlResponse(xhtml)
         }
-        val controllerId = DynamicControllerProvider.registerController(controller)
-        val url = DynamicControllerProvider.localUrlForControllerId(controllerId)
+        val controllerId = registerController(controller)
+        val url = urlForControllerId(controllerId)
         log.debug("Redirecting to " + url + " in response to " + method)
         RedirectResponse(url)
     }

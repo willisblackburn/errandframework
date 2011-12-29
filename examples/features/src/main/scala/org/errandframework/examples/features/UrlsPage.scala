@@ -16,7 +16,7 @@ class UrlsPage extends FeaturePage {
     <ul>
       <li>A URL generated from a path: {Link(pathUrl).render}</li>
       <li>A URL generated from a location: {Link(locationUrl).render}</li>
-      <li>A URL with a parameter: {Link(parameterUrl).render}</li>
+      <li>A URL with a parameter embedded in the URL: {Link(parameterUrl).render}</li>
       <li>A URL with an optional Int parameter: {Link(intParameterUrl).render}</li>
       <li>A URL with an optional Date parameter: {Link(dateParameterUrl).render}</li>
       <li>A link to the current location: {Link(Location.thisLocation.toUrl()).render}</li>
@@ -39,6 +39,6 @@ class UrlsPage extends FeaturePage {
     SearchPage.page -> Some(5))
 
   private def dateParameterUrl = searchLocation.toUrl(SearchPage.q -> "errand framework",
-    SearchPage.since -> Some(new Date(System.currentTimeMillis - 86400)))
+    SearchPage.since -> Some(new Date(System.currentTimeMillis - 86400000)), SearchPage.page -> Some(5))
 }
 

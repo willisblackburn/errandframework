@@ -10,6 +10,7 @@ import forms.{Choice, TextField}
 import org.errandframework.http._
 import java.util.UUID
 import pages.Page
+import ResourceServerControllerProvider.urlForResource
 
 /**
  * AjaxTextField is an input control that supports a type-ahead menu that the control retrieves from an
@@ -66,5 +67,5 @@ object AjaxTextField {
 
   val valueParameter = Parameter[String]("value")
 
-  val script = Script.fromUrl(ResourceServerControllerProvider.urlForResource(Path(classOf[AjaxTextField[_]].getPackage) / "AjaxTextField.js"))
+  val script = ExternalScript(urlForResource(Path(classOf[AjaxTextField[_]].getPackage) / "AjaxTextField.js"))
 }

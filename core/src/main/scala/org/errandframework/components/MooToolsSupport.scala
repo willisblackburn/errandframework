@@ -7,6 +7,7 @@ package org.errandframework.components
 import org.errandframework.http.Path
 import org.errandframework.http.ResourceServerControllerProvider
 import pages.Page
+import ResourceServerControllerProvider.urlForResource
 
 /**
  * Component that adds the MooTools library to the page.
@@ -17,5 +18,5 @@ object MooToolsSupport {
     Page.addHeadContent(script)
   }
 
-  private val script = Script.fromUrl(ResourceServerControllerProvider.urlForResource(Path(getClass.getPackage) / "mootools-core-1.3.2-full-nocompat.js"))
+  private val script = ExternalScript(urlForResource(Path(getClass.getPackage) / "mootools-core-1.3.2-full-nocompat.js"))
 }

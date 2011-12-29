@@ -9,27 +9,37 @@ import org.errandframework.util.XmlHelpers._
 /**
  * Component that renders a script tag for JavaScript.
  */
-class Script extends Component {
+class Script(val javaScript: String) extends Component {
 
-  def render() = <script src={asText(url)}>{asUnparsed(javaScript.map(wrap).getOrElse(""))}</script>
+  def render() = <script>{asUnparsed(javaScript)}</script>
 
-  // TODO, do I need wrap?
+  override def equals(that: Any) = that match {
+    case script: Script => javaScript == script.javaScript
+    case _ => false
+  }
 
-//  private def wrap(s: String) = "//<![CDATA[\n" + s + "\n//]]>"
-  private def wrap(s: String) = s
-
-  def url: Option[String] = None
-
-  def javaScript: Option[String] = None
+  override def hashCode() = javaScript.hashCode
 }
 
 object Script {
 
-  def apply(scriptJavaScript: String) = new Script {
-    override def javaScript = Some(scriptJavaScript)
+  def apply(javaScript: String) = new Script(javaScript)
+}
+
+class ExternalScript(val url: String) extends Component {
+
+  def render() = <script src={asText(url)}/>
+
+  override def equals(that: Any) = that match {
+    case script: ExternalScript => url == script.url
+    case _ => false
   }
 
-  def fromUrl(scriptUrl: String) = new Script {
-    override def url = Some(scriptUrl)
-  }
+  override def hashCode() = url.hashCode
 }
+
+object ExternalScript {
+
+  def apply(url: String) = new ExternalScript(url)
+}
+

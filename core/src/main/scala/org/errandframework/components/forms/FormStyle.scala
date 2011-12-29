@@ -82,7 +82,7 @@ object DefaultFormStyle extends FormStyle {
 
   def renderInputField[T](component: InputField[T]): NodeSeq = component.renderIfVisible {
     component.transform(<input type={component.inputType} name={component.name} value={component.encode} disabled={disabled(component)}
-        maxlength={asText(component.maxLength)} class="errand-InputField"/>)
+        class="errand-InputField"/>)
   }
 
   def renderFileField(component: FileField) = component.renderIfVisible {
@@ -119,15 +119,15 @@ object DefaultFormStyle extends FormStyle {
   }
 
   def renderLeftLabeledField[T](component: LabeledField[T]) = component.renderIfVisible {
-    component.transform(<span class="errand-LeftLabeledField">
+    component.transform(<div class="errand-LeftLabeledField">
       {component.label.render}<span class="errand-LeftLabeledField-field">{component.field.render}</span>
-    </span>)
+    </div>)
   }
 
   def renderRightLabeledField[T](component: LabeledField[T]) = component.renderIfVisible {
-    component.transform(<span class="errand-RightLabeledField">
+    component.transform(<div class="errand-RightLabeledField">
       <span class="errand-RightLabeledField-field">{component.field.render}</span>{component.label.render}
-    </span>)
+    </div>)
   }
 
   def renderButton(component: Button) = component.renderIfVisible {

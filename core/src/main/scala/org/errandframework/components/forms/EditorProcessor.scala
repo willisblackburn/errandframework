@@ -22,13 +22,16 @@ trait EditorProcessor extends Controller {
     def onValid(request: Request) = {
       for (editor <- editors)
         editor.updateModel
-      EditorProcessor.this.onValid(request)
+      if (EditorProcessor.this.validate)
+        EditorProcessor.this.onValid(request)
+      else
+        EditorProcessor.this.onError(request)
     }
 
     override def onError(request: Request) = {
       for (editor <- editors)
         editor.value.invalid.foreach(Message.error(_, Some(editor)))
-      EditorProcessor.this.onValid(request)
+      EditorProcessor.this.onError(request)
     }
   }
 

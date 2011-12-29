@@ -10,7 +10,7 @@ import org.errandframework.http._
 object FeaturesExampleApplication {
 
   val urlsLocation = rootLocation / "urls"
-  val searchLocation = urlsLocation / "search"
+  val searchLocation = urlsLocation / "search" / SearchPage.q
   val linksLocation = rootLocation / "links"
   val links2Location = rootLocation / "links2"
   val formsLocation = rootLocation / "forms"

@@ -21,18 +21,6 @@ abstract class Field[T](val parameter: RequestParameter[T]) extends Editor[T] {
   def name = parameter.name
 
   def value = parameter.value
-
-//  def decode() = parameter.decode
-
-//  /**
-//   * Identifies the required method (like POST) of a form that contains this field.
-//   */
-//  def formMethod: Option[Method] = None
-//
-//  /**
-//   * Identifies the required encoding type of a form that contains this field.
-//   */
-//  def formEncodingType: Option[String] = None
 }
 
 abstract class InputField[T](override val parameter: Parameter[T], val inputType: String) extends Field[T](parameter) {
@@ -41,19 +29,19 @@ abstract class InputField[T](override val parameter: Parameter[T], val inputType
 
   // TODO, move these to Parameter.  Maybe have a behavior that renders JavaScript to validate them.
 
-  /**
-   * Minimum length for the field.
-   * Set to &gt;0 to make the field required.
-   * Enforced at submit time.
-   */
-  def minLength: Option[Int] = None
-
-  /**
-   * Maximum length for the field.
-   * Expressed in HTML and also enforced at submit time.
-   */
-  def maxLength: Option[Int] = None
-
+//  /**
+//   * Minimum length for the field.
+//   * Set to &gt;0 to make the field required.
+//   * Enforced at submit time.
+//   */
+//  def minLength: Option[Int] = None
+//
+//  /**
+//   * Maximum length for the field.
+//   * Expressed in HTML and also enforced at submit time.
+//   */
+//  def maxLength: Option[Int] = None
+//
 //  override def decode() = {
 //    super.decode.valid flatMap {
 //      v => val s = v.toString

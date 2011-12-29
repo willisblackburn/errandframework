@@ -25,8 +25,8 @@ class DefaultErrandServlet extends ErrandServlet with DynamicControllerProvider 
       <html xmlns="http://www.w3.org/1999/xhtml">
         <h1>Welcome to Errand</h1>
         <p>
-          You are seeing this page because you have not created a mapping for the root location
-          in your Errand servlet or because you put DefaultErrandServlet.defaultMapper before your own mappers
+          You are seeing this page because you have not created a mapping for rootLocation
+          in your Errand servlet or because you put defaultMapper before your own mappers
           in your mappers list.
         </p>
       </html>)

@@ -9,6 +9,7 @@ import org.errandframework.http.Path
 import org.errandframework.components.{Script, MooToolsSupport}
 import org.errandframework.http.{ResourceServerControllerProvider, ErrandServlet}
 import pages.Page
+import ResourceServerControllerProvider.urlForResource
 
 /**
  * Component that adds AJAX support using MooTools to the page.
@@ -20,5 +21,5 @@ object AjaxSupport {
     Page.addHeadContent(script)
   }
 
-  private val script = Script.fromUrl(ResourceServerControllerProvider.urlForResource(Path(getClass.getPackage) / "AjaxSupport.js"))
+  private val script = ExternalScript(urlForResource(Path(getClass.getPackage) / "AjaxSupport.js"))
 }

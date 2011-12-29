@@ -5,6 +5,7 @@
 package org.errandframework.components
 
 import org.errandframework.http._
+import DynamicControllerProvider.{urlForControllerId, localUrlForControllerId, registerController}
 
 /**
  * EmbeddedController adds a controller to either a Component or a Behavior and registers it with the dynamic
@@ -17,9 +18,9 @@ trait EmbeddedController {
   /**
    * The dynamic controller URL.
    */
-  def url = DynamicControllerProvider.urlForControllerId(controllerId)
+  def url = urlForControllerId(controllerId)
 
-  def localUrl = DynamicControllerProvider.localUrlForControllerId(controllerId)
+  def localUrl = localUrlForControllerId(controllerId)
 
-  protected lazy val controllerId = DynamicControllerProvider.registerController(controller)
+  protected lazy val controllerId = registerController(controller)
 }

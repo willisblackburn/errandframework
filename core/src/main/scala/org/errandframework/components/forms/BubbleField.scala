@@ -8,6 +8,7 @@ package forms
 import java.util.UUID
 import org.errandframework.http._
 import org.errandframework.components.pages.Page
+import ResourceServerControllerProvider.urlForResource
 
 /**
  * A control that lets a user enter several different terms and creates a bubble from each.
@@ -60,5 +61,5 @@ object BubbleField {
       override def behaviors = fieldBehaviors
     }
 
-  val script = Script.fromUrl(ResourceServerControllerProvider.urlForResource(Path(classOf[BubbleField[_]].getPackage) / "BubbleField.js"))
+  val script = ExternalScript(urlForResource(Path(classOf[BubbleField[_]].getPackage) / "BubbleField.js"))
 }

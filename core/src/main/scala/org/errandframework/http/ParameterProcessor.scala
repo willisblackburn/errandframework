@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST
 trait ParameterProcessor extends Controller {
 
   def respond(request: Request) = {
-    if (decodeAndSetParameters)
+    if (decodeAndSetParameters && validate)
       onValid(request)
     else
       onError(request)

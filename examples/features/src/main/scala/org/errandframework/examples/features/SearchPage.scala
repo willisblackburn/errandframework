@@ -19,7 +19,7 @@ class SearchPage extends FeaturePage {
     <p>This location of this page is defined in terms of the {Link("URLs Page Location", urlsLocation.toUrl()).render} URL page location.</p>
     <p>Your query: {q.get} (since {since.get.map(_.toString).getOrElse("any date")})</p>
     <p>Displaying page: {effectivePage}</p>
-    <p>{Link("Next Page", searchLocation.toUrl(q, page -> Some(effectivePage + 1))).render}</p>
+    <p>{Link("Next Page", searchLocation.toUrl(q, since, page -> Some(effectivePage + 1))).render}</p>
   }
 
   private def effectivePage = page.get.getOrElse(1)
@@ -31,7 +31,7 @@ class SearchPage extends FeaturePage {
    * Using PageProcessor is not mandatory.  If the application needs more fine-grained control over parameter,
    * processing, it can use the decode method of Parameter rather than get.
    */
-  override val parameters = Seq(q, page)
+  override val parameters = Seq(q, since, page)
 }
 
 object SearchPage {
@@ -42,17 +42,17 @@ object SearchPage {
   val q = Parameter[String]("q")
 
   /**
-   * An optional page parameter.
+   * An optional parameter that uses a specific codec rather than one of the implicit ones in the http package.
    * Regular Parameter instances require that the given request parameter be included in the request.
    * Use OptionParameter if it's okay for the parameter not to be present.  The parameter will be decoded into
    * Some(value) if the value was supplied and None if it wasn't.
    */
-  val page = OptionParameter[Int]("page")
+  val since = OptionParameter[Date]("since")(new DateCodec(new SimpleDateFormat("yyyy-MM-dd")))
 
   /**
-   * An optional parameter that uses a specific codec rather than one of the implicit ones in the http package.
+   * An optional page parameter.
    */
-  val since = OptionParameter[Date]("since")(new DateCodec(new SimpleDateFormat("yyyy-MM-dd")))
+  val page = OptionParameter[Int]("page")
 }
 
 
