@@ -6,7 +6,7 @@ import org.errandframework.components.pages.PageController
 import FeaturesExampleApplication._
 
 /**
- * Servlet for Trivial Example.
+ * Servlet for Features Example.
  */
 class FeaturesExampleServlet extends DefaultErrandServlet {
 
