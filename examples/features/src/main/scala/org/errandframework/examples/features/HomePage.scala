@@ -1,6 +1,6 @@
 package org.errandframework.examples.features
 
-import org.errandframework.components.pages.{PageLink, Page}
+import org.errandframework.components.pages.Page
 import org.errandframework.components.Link
 
 import FeaturesExampleApplication._

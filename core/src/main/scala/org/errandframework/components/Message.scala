@@ -7,15 +7,13 @@ package org.errandframework.components
 import collection.mutable.ListBuffer
 import org.errandframework.http.RequestVar
 
-trait MessageType {
-  val priority: Int
-}
+case class MessageType(priority: Int)
 
 object MessageType {
-  val DEBUG = new MessageType { val priority = 0 }
-  val INFO = new MessageType { val priority = 1 }
-  val WARNING = new MessageType { val priority = 2 }
-  val ERROR = new MessageType { val priority = 3 }
+  val DEBUG = MessageType(0)
+  val INFO = MessageType(1)
+  val WARNING = MessageType(2)
+  val ERROR = MessageType(3)
 }
 
 import MessageType._

@@ -1,5 +1,7 @@
 package org.errandframework.http
 
+import org.errandframework.components.MessageStasherFilter
+
 /**
  * Subclass of ErrandServlet that provides some common mixins and settings.
  */
@@ -19,6 +21,8 @@ class DefaultErrandServlet extends ErrandServlet with DynamicControllerProvider 
 
   val resourceServerLocation = rootLocation / "res"
   protected val resourceServerController = new ResourceServerController(new ClassPathResourceFinder(mediaTypeMapper))
+
+  override protected def filters = Seq(MessageStasherFilter)
 
   protected val defaultMapper = new PathRequestMapper({
     case rootLocation() => XhtmlResponse(
