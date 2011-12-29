@@ -6,8 +6,8 @@ package org.errandframework.components
 
 import org.errandframework.http._
 
-// TODO, PageLink that accepts ParameterValue objects.
-// TODO, some kind of link that also accepts ParameterValue objects.  Actually this will go away if I have a Url class that
+// TODO, PageLink that accepts Assignment objects.
+// TODO, some kind of link that also accepts Assignment objects.  Actually this will go away if I have a Url class that
 // can include parameters.
 
 /**

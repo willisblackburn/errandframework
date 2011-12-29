@@ -16,4 +16,6 @@ object FeaturesExampleApplication {
   val linksLocation = rootLocation / "links"
   val links2Location = rootLocation / "links2"
   val formsLocation = rootLocation / "forms"
+  val repeatersLocation = rootLocation / "repeaters"
+  val scopeVariablesLocation = rootLocation / "scopevars"
 }

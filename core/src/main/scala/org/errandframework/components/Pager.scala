@@ -33,8 +33,8 @@ abstract class Pager extends Component {
   /**
    * Returns the starting index that the application should provide to the data source.
    * Note that it does not depend on count in any way;  in particular it doesn't try to return only valid
-   * start indexes based on the count.  Lucene only provides the result count as a result of a query, so we
-   * can't use the result count as an input to the query.
+   * start indexes based on the count.  Sometimes we don't know the count until we've actually requested the
+   * data from the source.
    */
   final def start = (max(page, 1) - 1) * pageSize
 

@@ -25,14 +25,16 @@ object HomePage extends Page {
       <li>{linksLink.render}</li>
       <li>{urlsLink.render}</li>
       <li>{formsLink.render}</li>
-      <li>Repeaters</li>
-      <li>Scope Variables</li>
+      <li>{repeatersLink.render}</li>
+      <li>{scopeVariablesLink.render}</li>
     </ul>
   }
 
   private val linksLink = Link("Links", linksLocation.toUrl())
   private val urlsLink = Link("URLs, Paths, and Parameters", urlsLocation.toUrl())
   private val formsLink = Link("Forms", formsLocation.toUrl())
+  private val repeatersLink = Link("Repeaters", repeatersLocation.toUrl())
+  private val scopeVariablesLink = Link("Scope Variables", scopeVariablesLocation.toUrl())
 
   override def title = "Errand Web Framework"
 }

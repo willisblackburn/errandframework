@@ -6,7 +6,6 @@ package org.errandframework.components
 
 import org.errandframework.http._
 
-
 /**
  * Filter that supports temporarily stashing messages when the server sends a redirect and
  * reloading them after receiving the next request.

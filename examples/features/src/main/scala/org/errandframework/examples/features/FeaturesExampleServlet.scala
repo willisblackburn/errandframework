@@ -22,6 +22,8 @@ class FeaturesExampleServlet extends DefaultErrandServlet {
     case urlsLocation() => new PageController(new UrlsPage)
     case searchLocation() => new PageController(new SearchPage)
     case formsLocation() => new PageController(new FormsPage)
+    case repeatersLocation() => new PageController(new RepeatersPage)
+    case scopeVariablesLocation() => new PageController(new ScopeVariablesPage)
   })
 
   override protected val mappers = Seq(mapper, defaultMapper)
