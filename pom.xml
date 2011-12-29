@@ -30,8 +30,8 @@
     </properties>
 
     <scm>
-        <connection>git@github.com:willisblackburn/errandframework.git</connection>
-        <developerConnection>git@github.com:willisblackburn/errandframework.git</developerConnection>
+        <connection>scm:git:git@github.com:willisblackburn/errandframework.git</connection>
+        <developerConnection>scm:git:git@github.com:willisblackburn/errandframework.git</developerConnection>
         <url>https://willisblackburn@github.com/willisblackburn/errandframework.git</url>
     </scm>
 
@@ -175,7 +175,7 @@
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
-                        <include>**/*Test.scala</include>
+                        <include>**/*Test.class</include>
                     </includes>
                 </configuration>
             </plugin>

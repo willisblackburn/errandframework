@@ -27,6 +27,7 @@ class FeaturesExampleServlet extends DefaultErrandServlet {
     case complexActionFormLocation() => new PageController(new ComplexActionFormPage)
     case repeatersLocation() => new PageController(new RepeatersPage)
     case scopeVariablesLocation() => new PageController(new ScopeVariablesPage)
+    case ajaxLocation() => new PageController(new AjaxPage)
   })
 
   override protected val mappers = Seq(mapper, defaultMapper)

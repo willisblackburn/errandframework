@@ -17,7 +17,7 @@ abstract class FeaturePage extends Page {
     <div>
       <h1>{title}</h1>
       {messagePanel.render}
-      featureContent.render
+      {featureContent.render}
       <p>{homeLink.render}</p>
     </div>
   }

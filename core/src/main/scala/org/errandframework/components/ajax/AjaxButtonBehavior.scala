@@ -16,9 +16,9 @@ object AjaxButtonBehavior extends Behavior {
   def transform(component: Component, elem: Elem) = {
     AjaxSupport.add
     // There are two possibilities:
-    // SubmitButton is a regular form submit button.  AJAX-ize it by retrieving the form's action URL and submitting
+    // 1.  SubmitButton is a regular form submit button.  AJAX-ize it by retrieving the form's action URL and submitting
     // the form to that URL via AJAX.
-    // ActionButton is submit button that only works with ActionForms.  The form's action URL is the dynamic controller's
+    // 2.  ActionButton is submit button that only works with ActionForms.  The form's action URL is the dynamic controller's
     // URL, and the button provides the value for the controller ID parameter.  AJAX-ize the form by submitting
     // to the form's action URL (as above) and also append the controller ID parameter name and value.
     // We can generalize this as follows:  Always submit to the action URL, and append the button name and value to

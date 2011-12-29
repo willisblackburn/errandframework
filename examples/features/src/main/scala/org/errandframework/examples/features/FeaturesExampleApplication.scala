@@ -21,4 +21,5 @@ object FeaturesExampleApplication {
   val complexActionFormLocation = formsLocation / "complexaction"
   val repeatersLocation = rootLocation / "repeaters"
   val scopeVariablesLocation = rootLocation / "scopevars"
+  val ajaxLocation = rootLocation / "ajax"
 }

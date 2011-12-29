@@ -38,6 +38,7 @@ object HomePage extends Page {
         </ul>
         <li>{repeatersLink.render}</li>
         <li>{scopeVariablesLink.render}</li>
+        <li>{ajaxLink.render}</li>
       </ul>
     </div>
   }
@@ -50,6 +51,7 @@ object HomePage extends Page {
   private val complexActionFormLink = Link("Complex ActionForm", complexActionFormLocation.toUrl())
   private val repeatersLink = Link("Repeaters", repeatersLocation.toUrl())
   private val scopeVariablesLink = Link("Scope Variables", scopeVariablesLocation.toUrl())
+  private val ajaxLink = Link("AJAX", ajaxLocation.toUrl())
 
   private val messagePanel = new MessagePanel
 

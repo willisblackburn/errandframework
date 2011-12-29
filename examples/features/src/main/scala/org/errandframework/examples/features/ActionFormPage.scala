@@ -171,6 +171,7 @@ input[name=age] {
     }
 
     private val saveAndCloseButton = ActionButton(ComplexActionFormPage.this, "Save and Close", editors, validateForm) {
+      // See MessageStasherFilter to see how this message is carried across the redirect.
       Message.info(submitMessage)
       RedirectResponse(rootLocation.toUrl())
     }

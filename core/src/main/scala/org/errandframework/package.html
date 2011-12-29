@@ -59,7 +59,6 @@ in the meantime.</p>
     <li>DONE: Resource (image, JavaScript) serving</li>
     <li>DONE: Better head and template support in XHtmlView</li>
     <li>DONE: AJAX</li>
-    <li>Naked objects</li>
     <li>DONE: Load default tags for template</li>
     <li>Better exception handling</li>
     <li>Session synchronization</li>
@@ -75,6 +74,7 @@ in the meantime.</p>
     <li>Convert log messsages to use format strings</li>
     <li>Add [this] to private as appropriate (actually don't do this)</li>
     <li>Import object methods where practical</li>
+    <li>Fix the circular dependency between http and components.</li>
 </ul>
 
 <h1>Miscellaneous to-dos</h1>
@@ -88,4 +88,6 @@ in the meantime.</p>
     <li>Merge Path and Location.</li>
     <li>URL class similar to Path/Location, returned from toUrl methods.</li>
     <li>Validators that are like behaviors for fields but can also add JavaScript to form elements.</li>
+    <li>Better AJAX support: we should handle RedirectResponse so we can show form errors without reloading
+        the page but then go to new page if the form was good.</li>
 </ul>
