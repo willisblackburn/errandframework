@@ -12,10 +12,13 @@ object FeaturesExampleApplication {
   // locations, so if we want to change the URL structure of the site, we can just change the locations.
 
   val urlsLocation = rootLocation / "urls"
-  val searchLocation = urlsLocation / "search" / SearchPage.q
+  val searchLocation = rootLocation / "search" / SearchPage.q
   val linksLocation = rootLocation / "links"
   val links2Location = rootLocation / "links2"
   val formsLocation = rootLocation / "forms"
+  val simpleFormLocation = formsLocation / "simple"
+  val actionFormLocation = formsLocation / "action"
+  val complexActionFormLocation = formsLocation / "complexaction"
   val repeatersLocation = rootLocation / "repeaters"
   val scopeVariablesLocation = rootLocation / "scopevars"
 }

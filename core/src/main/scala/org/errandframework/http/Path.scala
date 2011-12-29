@@ -91,13 +91,13 @@ object Path {
 
   val empty = new Path(Nil)
 
-  implicit def apply(names: List[String]) = new Path(names)
+  implicit def apply(names: List[String]): Path = new Path(names)
 
-  implicit def apply(path: String) = new Path(path)
+  implicit def apply(path: String): Path = new Path(path)
 
-  implicit def apply(c: Class[_]) = new Path(c.getName.split('.').toList)
+  implicit def apply(c: Class[_]): Path = new Path(c.getName.split('.').toList)
 
-  implicit def apply(pkg: Package) = new Path(pkg.getName.split('.').toList)
+  implicit def apply(pkg: Package): Path = new Path(pkg.getName.split('.').toList)
 
   def unapply(path: Path) = Some(path.names)
 

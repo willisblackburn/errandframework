@@ -32,7 +32,7 @@ object StatusResponse {
  * ForwardResponse instructs the framework to use the forward method of javax.servlet.RequestDispatcher to
  * forward the request to a new internal path.
  * Note that ForwardResponse accepts a <i>path</i> while RedirectResponse accepts a <i>URL</i>.
- * @path the path to which the request should be directed.  Will be passed through R.encodeUrl.
+ * @param path the path to which the request should be directed.  Will be passed through R.encodeUrl.
  */
 class ForwardResponse(path: String) extends Response {
 
@@ -53,7 +53,7 @@ object ForwardResponse {
  * Note that ForwardResponse accepts a <i>path</i> while RedirectResponse accepts a <i>URL</i>.
  * It's okay to provide a path to RedirectResponse, however, because the servlet container is required to convert
  * it to a URL before sending it to the client.
- * @path the path to which the request should be directed.  Will be passed through R.encodeRedirectURL.
+ * @param url the URL to which the request should be directed.  Will be passed through R.encodeRedirectURL.
  */
 class RedirectResponse(url: String) extends Response {
 

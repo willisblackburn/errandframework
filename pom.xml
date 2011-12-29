@@ -29,6 +29,12 @@
         <scala.version>2.9.1</scala.version>
     </properties>
 
+    <scm>
+        <connection>git@github.com:willisblackburn/errandframework.git</connection>
+        <developerConnection>git@github.com:willisblackburn/errandframework.git</developerConnection>
+        <url>https://willisblackburn@github.com/willisblackburn/errandframework.git</url>
+    </scm>
+
     <distributionManagement>
         <repository>
             <id>repo.errandframework.org</id>
@@ -50,23 +56,6 @@
             <email>wboyce@signetworks.com</email>
         </developer>
     </developers>
-
-    <repositories>
-        <repository>
-            <id>scala-tools.org</id>
-            <name>Scala-Tools Maven2 Repository</name>
-            <url>http://scala-tools.org/repo-releases</url>
-        </repository>
-        <repository>
-            <id>snapshots.scala-tools.org</id>
-            <name>Scala-Tools Maven2 Repository - Snapshots</name>
-            <url>http://scala-tools.org/repo-snapshots</url>
-        </repository>
-        <repository>
-            <id>jclouds</id>
-            <url>http://oss.sonatype.org/content/repositories/releases</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>
@@ -132,20 +121,6 @@
         <resources>
             <resource>
                 <filtering>false</filtering>
-                <directory>src/main/resources</directory>
-            </resource>
-            <resource>
-                <filtering>false</filtering>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**</include>
-                </includes>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
-            </resource>
-            <resource>
-                <filtering>false</filtering>
                 <directory>src/main/scala</directory>
                 <includes>
                     <include>**</include>
@@ -156,16 +131,6 @@
             </resource>
         </resources>
         <testResources>
-            <testResource>
-                <filtering>false</filtering>
-                <directory>src/test/java</directory>
-                <includes>
-                    <include>**</include>
-                </includes>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
-            </testResource>
             <testResource>
                 <filtering>false</filtering>
                 <directory>src/test/scala</directory>
@@ -210,11 +175,20 @@
                 <configuration>
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
-                        <include>**/*Test.java</include>
+                        <include>**/*Test.scala</include>
                     </includes>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>
