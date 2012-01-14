@@ -19,10 +19,10 @@ class DefaultErrandServlet extends ErrandServlet with DynamicControllerProvider 
   val dynamicLocation = rootLocation / "dyn"
   protected val dynamicController = new DynamicController
 
-  val resourceServerLocation = rootLocation / "res"
+  val resourceServerLocation = rootLocation / "res" / ResourceServerController.pathParameter
   protected val resourceServerController = new ResourceServerController(new ClassPathResourceFinder(mediaTypeMapper))
 
-  override protected def filters = Seq(MessageStasherFilter)
+  override protected val filters: Seq[RequestFilter] = Seq(MessageStasherFilter)
 
   protected val defaultMapper = new PathRequestMapper({
     case rootLocation() => XhtmlResponse(
@@ -38,5 +38,5 @@ class DefaultErrandServlet extends ErrandServlet with DynamicControllerProvider 
     case resourceServerLocation() => resourceServerController
   })
 
-  protected val mappers = Seq(defaultMapper)
+  protected val mappers: Seq[RequestMapper] = Seq(defaultMapper)
 }

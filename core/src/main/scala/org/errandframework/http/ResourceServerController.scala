@@ -15,13 +15,11 @@ class ResourceServerController(resourceFinder: ResourceFinder) extends Controlle
   def parameters = Seq(pathParameter)
 
   def onValid(request: Request) = {
-    // TODO, map extension to content type.  Use servlet API?
-    // TODO, content type, length, etc.
-    val payload = resourceFinder.get(pathParameter.get)
-    val metadata = payload.getContentMetadata
-    val mediaType = Option(metadata.getContentType).getOrElse("application/octet-stream")
-    val length = Option(metadata.getContentLength).map(_.toInt)
-    BinaryResponse(mediaType, payload.getInput, length)
+    val resource = resourceFinder.get(pathParameter.get)
+    val mediaType = resource.mediaType.getOrElse(MediaType("application", "octet-stream"))
+    val cacheControl = (resource.cacheControl ++ resource.maxAge.map("max-age=" + _)).mkString(", ")
+    val headers: Seq[(String, String)] = if (cacheControl != "") Seq(("Cache-Control" -> cacheControl)) else Seq.empty
+    BinaryResponse(mediaType, resource.payload, resource.length, headers: _*)
   }
 }
 

@@ -19,13 +19,14 @@ trait ContentResponse extends Response {
   val status = SC_OK
   // TODO, add optional length, name, encoding.
   val mediaType: MediaType
-  val length: Option[Int] = None
+  val length: Option[Long] = None
   val headers: Seq[(String, String)] = Seq.empty
 
   def send(httpRequest: HttpServletRequest, httpResponse: HttpServletResponse) {
     httpResponse.setStatus(status)
     httpResponse.setContentType(mediaType.toString)
-    length.foreach(httpResponse.setContentLength)
+    // We have to use setHeader instead of setContentLength because the latter only accepts int.
+    length.foreach(l => httpResponse.setHeader("Content-Length", l.toString))
     headers.foreach(h => httpResponse.setHeader(h._1, h._2))
   }
 }
@@ -33,16 +34,16 @@ trait ContentResponse extends Response {
 /**
  * HeadResponse is a response that doesn't send any body.
  */
-class HeadResponse(val mediaType: MediaType, override val length: Option[Int], override val headers: (String, String)*)
+class HeadResponse(val mediaType: MediaType, override val length: Option[Long], override val headers: (String, String)*)
   extends ContentResponse
 
 object HeadResponse {
 
-  def apply(mediaType: MediaType, length: Option[Int], headers: (String, String)*) =
+  def apply(mediaType: MediaType, length: Option[Long], headers: (String, String)*) =
     new HeadResponse(mediaType, length, headers: _*)
 }
 
-class CharacterResponse(val mediaType: MediaType, reader: Reader, override val length: Option[Int], override val headers: (String, String)*)
+class CharacterResponse(val mediaType: MediaType, reader: Reader, override val length: Option[Long], override val headers: (String, String)*)
   extends ContentResponse {
 
   // TODO, should return length in bytes not characters.  Probably I should read into a buffer, then send BinaryBufferResponse.
@@ -58,7 +59,7 @@ class CharacterResponse(val mediaType: MediaType, reader: Reader, override val l
 
 object CharacterResponse {
 
-  def apply(mediaType: MediaType, reader: Reader, length: Option[Int], headers: (String, String)*) =
+  def apply(mediaType: MediaType, reader: Reader, length: Option[Long], headers: (String, String)*) =
     new CharacterResponse(mediaType, reader, length, headers: _*)
 }
 
@@ -66,7 +67,7 @@ class CharacterBufferResponse(val mediaType: MediaType, s: CharSequence, overrid
   extends ContentResponse {
 
   // TODO, should return length in bytes not characters.  Probably I should read into a buffer, then send BinaryBufferResponse.
-  override val length = Some(s.length)
+  override val length = Some(s.length.toLong)
 
   override def send(httpRequest: HttpServletRequest, httpResponse: HttpServletResponse) {
     super.send(httpRequest, httpResponse)
@@ -83,7 +84,7 @@ object CharacterBufferResponse {
 /**
  * BinaryResponse is a response consisting of an arbitrary length of bytes.
  */
-class BinaryResponse(val mediaType: MediaType, stream: InputStream, override val length: Option[Int], override val headers: (String, String)*)
+class BinaryResponse(val mediaType: MediaType, stream: InputStream, override val length: Option[Long], override val headers: (String, String)*)
   extends ContentResponse {
 
   override def send(httpRequest: HttpServletRequest, httpResponse: HttpServletResponse) {
@@ -94,14 +95,14 @@ class BinaryResponse(val mediaType: MediaType, stream: InputStream, override val
 
 object BinaryResponse {
 
-  def apply(mediaType: MediaType, stream: InputStream, length: Option[Int], headers: (String, String)*) =
+  def apply(mediaType: MediaType, stream: InputStream, length: Option[Long], headers: (String, String)*) =
     new BinaryResponse(mediaType, stream, length, headers: _*)
 }
 
 class BinaryBufferResponse(val mediaType: MediaType, bytes: Array[Byte], override val headers: (String, String)*)
   extends ContentResponse {
 
-  override val length = Some(bytes.length)
+  override val length = Some(bytes.length.toLong)
 
   override def send(httpRequest: HttpServletRequest, httpResponse: HttpServletResponse) {
     super.send(httpRequest, httpResponse)
@@ -111,7 +112,7 @@ class BinaryBufferResponse(val mediaType: MediaType, bytes: Array[Byte], overrid
 
 object BinaryBufferResponse {
 
-  def apply(mediaType: MediaType, bytes: Array[Byte], length: Option[Int], headers: (String, String)*) =
+  def apply(mediaType: MediaType, bytes: Array[Byte], length: Option[Long], headers: (String, String)*) =
     new BinaryBufferResponse(mediaType, bytes, headers: _*)
 }
 

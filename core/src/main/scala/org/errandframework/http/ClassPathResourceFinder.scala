@@ -4,9 +4,6 @@
 
 package org.errandframework.http
 
-import org.jclouds.io.Payload
-import org.jclouds.io.payloads.InputStreamPayload
-
 /**
  * ClassPathController loads a static resource from the classpath.
  */
@@ -15,9 +12,13 @@ class ClassPathResourceFinder(mediaTypeMapper: MediaTypeMapper) extends Resource
   def get(path: Path) = {
     ClassPathHelpers.getResourceAsStream(path) match {
       case Some(stream) =>
-        val payload: Payload = new InputStreamPayload(stream)
-        payload.getContentMetadata.setContentType(mediaTypeMapper.getMediaTypeForExtension(path.extension).toString)
-        payload
+        new Resource {
+          val payload = stream
+          override val mediaType = Some(mediaTypeMapper.getMediaTypeForExtension(path.extension))
+          override val length = Some(stream.available.toLong)
+          override def cacheControl = Some("public")
+          override def maxAge = Some(86400)
+        }
       case _ => throw new ResourceNotFoundException
     }
   }

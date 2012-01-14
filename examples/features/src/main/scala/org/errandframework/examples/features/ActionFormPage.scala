@@ -63,7 +63,7 @@ trait ActionFormPageElements {
     ok
   }
 
-  protected val formsLink = Link("Forms", rootLocation.toUrl())
+  protected val formsLink = Link("Forms", formsLocation.toUrl())
 }
 
 /**
