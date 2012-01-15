@@ -19,8 +19,4 @@ trait Resource {
   def length: Option[Long] = None
 
   def lastModifiedTime: Option[Date] = None
-
-  def cacheControl: Option[String] = None
-
-  def maxAge: Option[Int] = None
 }

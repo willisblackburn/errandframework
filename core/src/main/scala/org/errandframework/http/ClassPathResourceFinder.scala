@@ -16,8 +16,6 @@ class ClassPathResourceFinder(mediaTypeMapper: MediaTypeMapper) extends Resource
           val payload = stream
           override val mediaType = Some(mediaTypeMapper.getMediaTypeForExtension(path.extension))
           override val length = Some(stream.available.toLong)
-          override def cacheControl = Some("public")
-          override def maxAge = Some(86400)
         }
       case _ => throw new ResourceNotFoundException
     }
